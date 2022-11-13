@@ -61,22 +61,24 @@ public class EnergyReadWriteThread extends ReadWriteThread {
 
                 String finalYear = year;
                 String finalMonth = month;
+                // remove leading 0 from month if it exists
+                month = month.replaceFirst("^0+(?!$)", "");
                 countSimilarKeys = keyList.keySet().stream().filter(key -> key.startsWith(finalYear + "-" + finalMonth)).toArray().length;
                 if (bw != null) bw.close();
-                file = initFile(outputDir + "/" + year + "/" + month + "/" + filePrefix + "-" + currentKey, true, countSimilarKeys);
+                file = initFile(outputDir + "/" + year + "/" + month.replaceFirst("^0+(?!$)", "") + "/" + filePrefix + "-" + currentKey, true, countSimilarKeys);
                 bw = new BufferedWriter(new FileWriter(file, true));
                 bw.write(line + "\n");
                 currentKey = year + "-" + month + "-" + countSimilarKeys;
                 keyList.put(currentKey, rawFilePath);
             } else if (keyList.keySet().stream().anyMatch(currentKey::startsWith)) {
                 if (bw == null) {
-                    file = initFile(outputDir + "/" + year + "/" + month + "/" + filePrefix + "-" + currentKey, false, countSimilarKeys);
+                    file = initFile(outputDir + "/" + year + "/" + month.replaceFirst("^0+(?!$)", "") + "/" + filePrefix + "-" + currentKey, false, countSimilarKeys);
                     bw = new BufferedWriter(new FileWriter(file, true));
                 }
                 bw.write(line + "\n");
             } else if (keyList.keySet().stream().noneMatch(currentKey::startsWith)) {
                 if (bw != null) bw.close();
-                file = initFile(outputDir + "/" + year + "/" + month + "/" + filePrefix + "-" + currentKey, true, 0);
+                file = initFile(outputDir + "/" + year + "/" + month.replaceFirst("^0+(?!$)", "") + "/" + filePrefix + "-" + currentKey, true, 0);
                 bw = new BufferedWriter(new FileWriter(file, true));
                 bw.write(line + "\n");
                 keyList.put(currentKey, rawFilePath);
