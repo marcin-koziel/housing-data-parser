@@ -45,7 +45,7 @@ public class DataParser {
                         .forEach(File::delete);
             }
             endTime = System.currentTimeMillis();
-            if (ap.isArgValueTrue(ArgsEnum.VERBOSE.getLongName())) System.out.println("# Reading consumption files... Elapsed time: " + (endTime - startTime) + " ms");
+            if (ap.isArgValueTrue(ArgsEnum.VERBOSE.getLongName())) System.out.println("# Deleting output directory... Elapsed time: " + (endTime - startTime) + " ms");
 
             startTime = System.currentTimeMillis();
             if (ap.isArgValueTrue(ArgsEnum.VERBOSE.getLongName())) System.out.println("# Reading and Writing consumption files...");
