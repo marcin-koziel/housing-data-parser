@@ -54,9 +54,8 @@ public class EnergyReadWriteThread extends ReadWriteThread {
             }
 
             if (keyList.keySet().stream().anyMatch(currentKey::startsWith) && !keyList.get(currentKey).equals(rawFilePath)) {
-
                 if (!DataParser.multipleFiles.containsKey(currentKey.matches("^[0-9]+([+-]?(?=\\.\\d|\\d)(?:\\d+)?(?:\\.?\\d*))(?:[eE]([+-]?\\d+))?$"))) {
-                    DataParser.multipleFiles.put(currentKey, outputDir + "/" + year + "/" + month);
+                    DataParser.multipleFiles.put(currentKey, outputDir + "/" + year + "/" + month.replaceFirst("^0+(?!$)", ""));
                 }
 
                 String finalYear = year;
