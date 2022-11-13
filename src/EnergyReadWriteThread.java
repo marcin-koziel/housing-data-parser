@@ -61,8 +61,6 @@ public class EnergyReadWriteThread extends ReadWriteThread {
 
                 String finalYear = year;
                 String finalMonth = month;
-                // remove leading 0 from month if it exists
-                month = month.replaceFirst("^0+(?!$)", "");
                 countSimilarKeys = keyList.keySet().stream().filter(key -> key.startsWith(finalYear + "-" + finalMonth)).toArray().length;
                 if (bw != null) bw.close();
                 file = initFile(outputDir + "/" + year + "/" + month.replaceFirst("^0+(?!$)", "") + "/" + filePrefix + "-" + currentKey, true, countSimilarKeys);

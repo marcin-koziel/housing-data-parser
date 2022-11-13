@@ -35,17 +35,14 @@ public class DataParser {
 
         try {
 
-            startTime = System.currentTimeMillis();
-            if (ap.isArgValueTrue(ArgsEnum.VERBOSE.getLongName())) System.out.println("# Deleting output directory...");
             Path outputDir = Paths.get(ap.getArgValue(ArgsEnum.OUTPUT_DIR.getLongName()));
             if (Files.exists(outputDir)) {
+                if (ap.isArgValueTrue(ArgsEnum.VERBOSE.getLongName())) System.out.println("# Deleting output directory...");
                 Files.walk(outputDir)
                         .sorted((o1, o2) -> o2.compareTo(o1))
                         .map(Path::toFile)
                         .forEach(File::delete);
             }
-            endTime = System.currentTimeMillis();
-            if (ap.isArgValueTrue(ArgsEnum.VERBOSE.getLongName())) System.out.println("# Deleting output directory... Elapsed time: " + (endTime - startTime) + " ms");
 
             startTime = System.currentTimeMillis();
             if (ap.isArgValueTrue(ArgsEnum.VERBOSE.getLongName())) System.out.println("# Reading and Writing consumption files...");
