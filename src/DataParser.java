@@ -18,7 +18,7 @@ public class DataParser {
     private final List<String> energyPaths = new ArrayList<>();
     private final List<String> weatherPaths = new ArrayList<>();
     private static final HashMap<String, String> energyKeys = new HashMap<>();
-    private final ArgsParser ap = new ArgsParser("0.0.2");
+    private final ArgsParser ap = new ArgsParser("0.0.4");
 
 
     public boolean run() {
